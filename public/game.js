@@ -101,13 +101,33 @@ function updateInput(){
   socket.emit("input",input);
 }
 const keyMap={w:"up",ArrowUp:"up",s:"down",ArrowDown:"down",a:"left",ArrowLeft:"left",d:"right",ArrowRight:"right"};
-window.addEventListener("keydown",e=>{
-  const key=keyMap[e.key]||keyMap[e.key.toLowerCase()];
-  if(key){e.preventDefault();input[key]=true;updateInput();}
+
+window.addEventListener("keydown", e => {
+  // Don't intercept keyboard input while typing in a form field.
+  if (e.target.matches("input, textarea, select, [contenteditable='true']")) {
+    return;
+  }
+
+  const key = keyMap[e.key] || keyMap[e.key.toLowerCase()];
+
+  if (key) {
+    e.preventDefault();
+    input[key] = true;
+    updateInput();
+  }
 });
-window.addEventListener("keyup",e=>{
-  const key=keyMap[e.key]||keyMap[e.key.toLowerCase()];
-  if(key){input[key]=false;updateInput();}
+
+window.addEventListener("keyup", e => {
+  if (e.target.matches("input, textarea, select, [contenteditable='true']")) {
+    return;
+  }
+
+  const key = keyMap[e.key] || keyMap[e.key.toLowerCase()];
+
+  if (key) {
+    input[key] = false;
+    updateInput();
+  }
 });
 window.addEventListener("blur",()=>{input={up:false,down:false,left:false,right:false};updateInput();});
 // Send held keys at a steady rate; server remains authoritative for movement and ownership.
