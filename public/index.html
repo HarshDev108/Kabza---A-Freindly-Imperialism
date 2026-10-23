@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TERRITORY RUSH // Pixel Arena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="scanlines"></div>
+<main class="shell">
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon">▦</span><div><h1>TERRITORY RUSH</h1><p>PIXEL ARENA // ONLINE DUEL</p></div></div>
+    <div class="online"><span class="pulse"></span> MULTIPLAYER READY</div>
+  </header>
+
+  <section id="lobby" class="lobby panel">
+    <div class="hero-art" aria-hidden="true"><span class="pixel p1"></span><span class="pixel p2"></span><span class="hero-grid"></span></div>
+    <p class="eyebrow">CLAIM THE GRID. OWN THE ARENA.</p>
+    <h2>EVERY TILE<br><em>COUNTS.</em></h2>
+    <p class="intro">Two rivals. 120 seconds. Your 2×2 footprint claims every tile your path crosses. Take the lead before time runs out.</p>
+    <label for="playerName">PLAYER CALLSIGN</label>
+    <input id="playerName" maxlength="16" placeholder="PIXEL PILOT" value="PIXEL PILOT">
+    <div class="lobby-actions">
+      <button id="createBtn" class="btn primary">▣ CREATE ROOM</button>
+      <div class="join-row"><input id="roomCode" maxlength="4" placeholder="ROOM CODE"><button id="joinBtn" class="btn secondary">JOIN ↗</button></div>
+    </div>
+    <p id="lobbyMessage" class="message" role="status">Create a room and share its code with your rival.</p>
+    <div class="howto"><div><b>01</b><span>CREATE OR JOIN</span></div><div><b>02</b><span>MOVE + PAINT</span></div><div><b>03</b><span>TOP THE SCORE</span></div></div>
+  </section>
+
+  <section id="game" class="game hidden">
+    <div class="scoreboard panel">
+      <div class="score player-blue"><span class="swatch"></span><div><small id="name1">BLUE PLAYER</small><strong id="score1">0.0%</strong></div></div>
+      <div class="timer-wrap"><small>TIME LEFT</small><strong id="timer">02:00</strong><span id="statusPill" class="status-pill">WAITING</span></div>
+      <div class="score player-orange"><div><small id="name2">ORANGE PLAYER</small><strong id="score2">0.0%</strong></div><span class="swatch"></span></div>
+    </div>
+    <div class="arena panel"><div class="arena-head"><span>▦ GRID SECTOR <b id="roomLabel">----</b></span><span><i class="tiny-dot"></i> LIVE MATCH</span></div><canvas id="board" width="800" height="480" aria-label="Territory game board"></canvas>
+      <div id="overlay" class="overlay"><div class="overlay-card"><span class="big-pixel">▦</span><h3 id="overlayTitle">WAITING FOR RIVAL</h3><p id="overlayText">Send your room code to another player to begin.</p><button id="overlayBtn" class="btn primary hidden">PLAY AGAIN ↻</button></div></div>
+    </div>
+    <div class="bottom-row"><div class="legend panel"><span><i class="legend-blue"></i> BLUE TERRITORY</span><span><i class="legend-orange"></i> ORANGE TERRITORY</span><span><i class="legend-empty"></i> UNCLAIMED</span></div><button id="copyBtn" class="btn secondary">COPY ROOM CODE <b id="copyCode">----</b></button></div>
+    <div class="controls panel"><div><b>PLAYER CONTROLS</b><p id="controlText">WASD / ARROW KEYS</p></div><div class="keycaps"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><p class="control-note">Move continuously. Your 2×2 footprint paints every tile crossed.</p></div>
+  </section>
+  <footer>© TERRITORY RUSH <span>•</span> PIXEL POWERED • MAY THE BIGGEST LANDLORD WIN</footer>
+</main>
+<script src="/socket.io/socket.io.js"></script><script src="game.js"></script>
+</body></html>
